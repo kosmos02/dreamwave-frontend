@@ -15,3 +15,10 @@
 #journal-text {
   width: 125vh
 }
+
+#post-box {
+  background-color: #ba68c8;
+  height: 15rem;
+  margin-top: 5rem;
+  width: 35rem;
+}

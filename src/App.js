@@ -3,7 +3,9 @@ import './App.css';
 // import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import NavBar from './components/navbar'
-import { Typography, Button, CssBaseline, Grid, } from '@material-ui/core';
+import { Typography, Button, CssBaseline, Grid, Box, Paper, Avatar} from '@material-ui/core';
+import theme from './theme';
+import Headshot from './images/headhsot.jpeg'
 
 
 class App extends Component {
@@ -19,11 +21,11 @@ class App extends Component {
           justify='center'
           alignItems='center'
         >
-          <div className="title">
+          <Box className="title">
             <Typography variant="h1">DreamWave</Typography>
-          </div>
+          </Box>
 
-          <div id="journal-about">
+          <Box id="journal-about">
             <Typography id="journal-text" variant='body1'>
               Here you can make a post about the dream you had.
               It includes the date, whether it was a positive dream, neutral, or nightmare,
@@ -32,7 +34,11 @@ class App extends Component {
               Friends can comment on your dream to help you interpret it!
               The information you put here will be used for analytics.
           </Typography>
-          </div>
+          </Box>
+          <Paper id='post-box' elevation={3} variant='outline'>
+            <Avatar alt='Alex Gabriel' src={Headshot}/>
+          </Paper>
+          
         </Grid>
 
       </Router>
