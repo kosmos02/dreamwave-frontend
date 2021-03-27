@@ -17,8 +17,18 @@
 }
 
 #post-box {
-  background-color: #ba68c8;
+  /* background-color: #ba68c8; */
   height: 15rem;
   margin-top: 5rem;
   width: 35rem;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  
+}
+
+#post-form{
+  
+  
+  
 }
