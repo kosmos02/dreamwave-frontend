@@ -1,16 +1,73 @@
 import React from 'react'
 import { Paper, Accordion, AccordionSummary, AccordionDetails,
 Avatar, TextField, Checkbox, FormControlLabel, 
-InputLabel, Select, FormControl } from '@material-ui/core'
+InputLabel, Select, FormControl, Typography, Divider, IconButton, Icon,
+Chip } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Headshot from '../../images/headhsot.jpeg'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Post() {
+    const dispatch = useDispatch()
+    const tags = useSelector(state => state.currentTags)
+    console.log(tags)
+
+    const [expanded, setExpanded] = useState(false)
+
+    const expandAccordion = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false)
+    }
+
+    const [tag, addChar] = useState('')
+
+    const handleChangeTag = (event) => {
+        addChar(event.target.value)
+    }
+
+    // useEffect(addTag, [])
+
+    function addTag(tag){
+        dispatch({type: 'ADD_TAG', payload: tag})
+
+    }
+
+    function deleteTag(tag){
+        dispatch({type: 'DELETE_TAG', payload: tag})
+    }
+
+    function makeChips(){
+        return(
+            tags.map( tag => {
+              return (
+                  <Chip
+                    label={tag}
+                    onDelete={() => deleteTag(tag)}
+                    />
+              )  
+            })
+        )
+    }
+
     return (
-        <Paper id='post-box' elevation={3} variant='outline'>
-            <Avatar alt='Alex Gabriel' src={Headshot} />
+        
+        <Accordion id='accordion' expanded={expanded === 'panel1'} onChange={expandAccordion('panel1')}>
+            <AccordionSummary
+                expandIcon={<ExpandMoreIcon/>}
+                aria-controls="panel1bh-content"
+                id="post-accordion-summary"
+                >
+                    <Avatar alt='Alex Gabriel' src={Headshot} />
+                    <Typography>Post</Typography>
+                    {makeChips()}
+
+            </AccordionSummary>
+            <AccordionDetails>
             <form id='post-form'>
                 <TextField
                     id='date'
+                    className='input'
                     label='DreamDay'
                     type='date'
                     InputLabelProps={{
@@ -22,8 +79,9 @@ function Post() {
                     <Checkbox/>
                 }
                 label='Lucid'
+                className='input'
                 />
-                <FormControl variant='outlined'>
+                <FormControl className='input' variant='outlined'>
                     <InputLabel htmlFor='type'>Type</InputLabel>
                     <Select
                         native
@@ -40,8 +98,18 @@ function Post() {
                         </Select>
 
                 </FormControl>
+                
+                <TextField id='tag-input' label='Tags' onChange={handleChangeTag}/>
+                <IconButton onClick={() => addTag(tag)}>
+                    <AddIcon/>
+                </IconButton>
+                <Divider orientation='vertical' flexItem/>
             </form>
-        </Paper>
+            </AccordionDetails>
+        </Accordion>
+            
+            
+      
 
     )
 }

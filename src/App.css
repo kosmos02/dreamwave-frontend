@@ -16,19 +16,23 @@
   width: 125vh
 }
 
-#post-box {
-  /* background-color: #ba68c8; */
-  height: 15rem;
-  margin-top: 5rem;
-  width: 35rem;
+#accordion {
+  margin-top: 3rem;
+}
+
+#post-accordion-summary {
   display: flex;
-  flex-direction: row;
-  /* justify-content: space-between; */
-  
+  flex-wrap: wrap;
 }
 
 #post-form{
   
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: ;
   
-  
+}
+
+.input {
+
 }
