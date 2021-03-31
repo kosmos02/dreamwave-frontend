@@ -18,6 +18,7 @@
 
 #accordion {
   margin-top: 3rem;
+  max-width: 45rem;
 }
 
 #post-accordion-summary {
@@ -25,14 +26,22 @@
   flex-wrap: wrap;
 }
 
+#post-heading{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 #post-form{
   
   display: flex;
   flex-wrap: wrap;
-  justify-content: ;
   
 }
 
 .input {
+  margin-right: 5rem;
+}
 
+#post-text {
+  margin-top: 1rem;
 }
