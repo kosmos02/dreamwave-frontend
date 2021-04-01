@@ -15,23 +15,47 @@ import { ADD_TAG, DELETE_TAG } from '../../Redux/types'
 function Post() {
     const dispatch = useDispatch()
     const tags = useSelector(state => state.currentTags)
-    console.log(tags)
 
     const [expanded, setExpanded] = useState(false)
-    const [tag, addChar] = useState('')
+    const [tag, setCharTag] = useState('')
+    const [postTextField, setCharTextField] = useState('')
+    const [typeSelect, setTypeSelect] = useState('')
+    const [datePicker, setDatePicker] = useState('')
+    const [checked, setChecked] = useState(false)
 
     const expandAccordion = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false)
     }
 
     const handleChangeTag = (event) => {
-        addChar(event.target.value)
+        setCharTag(event.target.value)
     }
+
+    const handleChangePostField = (event) => {
+        setCharTextField(event.target.value)
+    }
+
+    const handleChangeTypeSelect = (event) => {
+        setTypeSelect(event.target.value)
+    }
+
+    const handleChangeDatePicker = (event) => {
+        setDatePicker(event.target.value)
+    }
+
+    const handleChangeCheckbox = (event) => {
+        setChecked(event.target.checked)
+    }
+    console.log(checked)
+    
+    
 
     // useEffect(addTag, [])
 
-    function addTag(tag) {
-        dispatch({ type: ADD_TAG, payload: tag })
+    function addTag(tag ) {
+        if (tags.length < 6){
+            dispatch({ type: ADD_TAG, payload: tag })
+        }   
     }
 
     function deleteTag(tag) {
@@ -76,12 +100,13 @@ function Post() {
                             InputLabelProps={{
                                 shrink: true,
                             }}
+                            onChange={handleChangeDatePicker}
                         />
 
 
                         <FormControlLabel
                             control={
-                                <Checkbox />
+                                <Checkbox onChange={handleChangeCheckbox} />
                             }
                             label='Lucid'
                             className='input'
@@ -97,11 +122,13 @@ function Post() {
                                     name: 'type',
                                     id: 'type'
                                 }}
+                                value={typeSelect}
+                                onChange={handleChangeTypeSelect}
                             >
                                 <option aria-label="None" value="" />
-                                <option value={'postitive'}>Positive</option>
-                                <option value={'neutral'}>Neutral</option>
-                                <option value={'nightmare'}>Nightmare</option>
+                                <option value={'Postitive'}>Positive</option>
+                                <option value={'Neutral'}>Neutral</option>
+                                <option value={'Nightmare'}>Nightmare</option>
                             </Select>
 
                         </FormControl>
@@ -120,7 +147,7 @@ function Post() {
                         {/* <Divider orientation='vertical' flexItem /> */}
                         <Grid id='post-text' container justify='space-evenly'>
                             <Grid item xs={10}>
-                                <TextField variant='outlined' fullWidth />
+                                <TextField variant='outlined' fullWidth onChange={handleChangePostField} />
 
                             </Grid>
                             <Grid item>
