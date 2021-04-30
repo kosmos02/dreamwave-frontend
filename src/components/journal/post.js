@@ -11,10 +11,14 @@ import Headshot from '../../images/headhsot.jpeg'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ADD_TAG, DELETE_TAG } from '../../Redux/types'
+import { ADD_DREAMS } from '../../Redux/types'
 
 function Post() {
+    const baseURL = 'http://localhost:4000'
+
     const dispatch = useDispatch()
     const tags = useSelector(state => state.currentTags)
+    const dreamlog = useSelector(state => state.dreams)
 
     const [expanded, setExpanded] = useState(false)
     const [tag, setCharTag] = useState('')
@@ -46,11 +50,15 @@ function Post() {
     const handleChangeCheckbox = (event) => {
         setChecked(event.target.checked)
     }
-    console.log(checked)
-    
     
 
-    // useEffect(addTag, [])
+    useEffect(() => {
+        fetch(`${baseURL}/dreams`)
+            .then(response => response.json())
+            .then(dreams => {
+                dispatch({ type: ADD_DREAMS, payload: dreams})
+            })
+    }, [])
 
     function addTag(tag ) {
         if (tags.length < 6){
@@ -74,6 +82,16 @@ function Post() {
             })
         )
     }
+
+    // function postClick(){
+    //     fetch(`${baseURL}/dreams`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ date: })
+    //     })
+    // }
 
     return (
 
