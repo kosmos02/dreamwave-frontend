@@ -11,7 +11,7 @@ import Headshot from '../../images/headshot.jpeg'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ADD_TAG, DELETE_TAG } from '../../Redux/types'
-// import { ADD_DREAMS } from '../../Redux/types'
+import { ADD_DREAMS, ADD_DREAM } from '../../Redux/types'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
@@ -109,7 +109,7 @@ function Post() {
             body: JSON.stringify(postDream)
         })
             .then(response => response.json())
-            .then(post => console.log(post))
+            dispatch({ type: ADD_DREAM, payload: postDream})
     }
 
     return (
@@ -163,9 +163,9 @@ function Post() {
                                 onChange={handleChangeTypeSelect}
                             >
                                 <option aria-label="None" value="" />
-                                <option value={'Postitive'}>Positive</option>
-                                <option value={'Neutral'}>Neutral</option>
-                                <option value={'Nightmare'}>Nightmare</option>
+                                <option value={'positive'}>Positive</option>
+                                <option value={'neutral'}>Neutral</option>
+                                <option value={'nightmare'}>Nightmare</option>
                             </Select>
 
                         </FormControl>
