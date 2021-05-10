@@ -45,3 +45,16 @@
 #post-text {
   margin-top: 1rem;
 }
+
+#legend{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+}
+
+.dream{
+  width: 45rem;
+  margin-top: 1rem;
+}
+
+

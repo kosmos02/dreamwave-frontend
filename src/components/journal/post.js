@@ -7,18 +7,26 @@ import {
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import Headshot from '../../images/headhsot.jpeg'
+import Headshot from '../../images/headshot.jpeg'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ADD_TAG, DELETE_TAG } from '../../Redux/types'
-import { ADD_DREAMS } from '../../Redux/types'
+// import { ADD_DREAMS } from '../../Redux/types'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+    chips: {
+        background : 'linear-gradient(93deg, rgba(25,189,232,1) 0%, rgba(10,238,252,1) 100%)'
+    }
+})
 
 function Post() {
+    const classes = useStyles()
     const baseURL = 'http://localhost:4000'
 
     const dispatch = useDispatch()
     const tags = useSelector(state => state.currentTags)
-    const dreamlog = useSelector(state => state.dreams)
+    // const dreamlog = useSelector(state => state.dreams)
 
     const [expanded, setExpanded] = useState(false)
     const [tag, setCharTag] = useState('')
@@ -52,13 +60,13 @@ function Post() {
     }
     
 
-    useEffect(() => {
-        fetch(`${baseURL}/dreams`)
-            .then(response => response.json())
-            .then(dreams => {
-                dispatch({ type: ADD_DREAMS, payload: dreams})
-            })
-    }, [])
+    // useEffect(() => {
+    //     fetch(`${baseURL}/dreams`)
+    //         .then(response => response.json())
+    //         .then(dreams => {
+    //             dispatch({ type: ADD_DREAMS, payload: dreams})
+    //         })
+    // }, [])
 
     function addTag(tag ) {
         if (tags.length < 6){
@@ -75,6 +83,7 @@ function Post() {
             tags.map(tag => {
                 return (
                     <Chip
+                        className={classes.chips}
                         label={tag}
                         onDelete={() => deleteTag(tag)}
                     />
@@ -83,15 +92,25 @@ function Post() {
         )
     }
 
-    // function postClick(){
-    //     fetch(`${baseURL}/dreams`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ date: })
-    //     })
-    // }
+    const postDream = {
+        date: datePicker,
+        lucid: checked,
+        type: typeSelect,
+        tagsarray: tags,
+        details: postTextField
+    }
+
+    function postClick(){
+        fetch(`${baseURL}/dreams`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postDream)
+        })
+            .then(response => response.json())
+            .then(post => console.log(post))
+    }
 
     return (
 
@@ -169,7 +188,12 @@ function Post() {
 
                             </Grid>
                             <Grid item>
-                                <Button color='inherit'>POST</Button>
+                                <Button 
+                                    color='inherit'
+                                    onClick={() => postClick()}
+                                >
+                                POST
+                                </Button>
                             </Grid>
 
                         </Grid>
