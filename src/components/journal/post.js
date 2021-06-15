@@ -30,7 +30,7 @@ function Post() {
 
     const [expanded, setExpanded] = useState(false)
     const [tag, setCharTag] = useState('')
-    const [postTextField, setCharTextField] = useState('')
+    let [postTextField, setCharTextField] = useState('')
     const [typeSelect, setTypeSelect] = useState('')
     const [datePicker, setDatePicker] = useState('')
     const [checked, setChecked] = useState(false)
@@ -71,7 +71,7 @@ function Post() {
     function addTag(tag ) {
         if (tags.length < 6){
             dispatch({ type: ADD_TAG, payload: tag })
-        }   
+        }     
     }
 
     function deleteTag(tag) {

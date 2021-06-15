@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ADD_DREAMS } from '../../Redux/types'
+import { ADD_DREAMS, DELETE_DREAM } from '../../Redux/types'
 import { Grid, Paper, Box, Typography, Chip } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions';
@@ -60,6 +60,16 @@ function Entries(){
         }
     }
 
+    const deleteDream = (dream) => {
+        fetch(`${baseURL}/dreams/${dream.id}`, {
+            method: 'DELETE'
+        })
+            .then(
+                dispatch({ type: DELETE_DREAM, payload: dream}),
+                console.log(dream)
+                )
+    }
+
 
     const displayDreams = () => {
         console.log(dreamlog)
@@ -75,7 +85,10 @@ function Entries(){
                             title={dream.date}
                             subheader={dream.lucid === true ? 'Lucid' : null}
                             action={
-                                <IconButton aria-label='delete'>
+                                <IconButton 
+                                    aria-label='delete'
+                                    onClick={() => deleteDream(dream)}
+                                    >
                                     <DeleteIcon fontSize='small'/>
                                 </IconButton>
                             }

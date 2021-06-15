@@ -3,15 +3,18 @@ import { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import { Button, makeStyles, Menu, MenuItem } from '@material-ui/core'
+import { Button, Menu, MenuItem } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
     buttonText: {
-        colorInherit: 'white'
+        color: 'white'
     }
 })
 
 const NavBar = () => {
+    const classes = useStyles()
+
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClick = (event) => {
@@ -29,11 +32,15 @@ const NavBar = () => {
                     <Typography variant="h5" color="inherit">
                         DreamWave
                     </Typography>
-                    <Button>Journal</Button>
-                    <Button>Dictionary</Button>
-                    <Button>Analytics</Button>
-                    <Button>About</Button>
-                    <Button aria-controls="simple-menu" aria-haspopup='true' onClick={handleClick}>Account</Button>
+                    <Button className={classes.buttonText} >Journal</Button>
+                    <Button className={classes.buttonText}>Dictionary</Button>
+                    <Button className={classes.buttonText}>Analytics</Button>
+                    <Button className={classes.buttonText}>About</Button>
+                    <Button 
+                        className={classes.buttonText} 
+                        aria-controls="simple-menu" 
+                        aria-haspopup='true' 
+                        onClick={handleClick}>Account</Button>
                     <Menu
                         id="simple-menu"
                         anchorEl={anchorEl}
