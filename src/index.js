@@ -7,11 +7,16 @@ import { ThemeProvider } from '@material-ui/core/styles'
 // import theme from './theme'
 import { Provider } from 'react-redux'
 import store from './Redux/store'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+      </Router>
+      
     </Provider>
     {/* <ThemeProvider theme={theme}> */}
       

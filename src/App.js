@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import './App.css';
 // import "bootstrap/dist/css/bootstrap.min.css"
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { Route } from 'react-router-dom'
 import NavBar from './components/navbar'
 import { Button, CssBaseline, Grid, Box, } from '@material-ui/core';
 // import theme from './theme';
 import Journal from './components/journal/journal'
+// import Dictionary from './components/dictionary/dictionary'
+// import Analytics from './components/analytics/analytics'
+// import About from './components/about/about'
 
 
 class App extends Component {
 
   render() {
     return (
-      <Router>
+      <>
         <CssBaseline />
         <NavBar />
         <Grid
@@ -21,14 +24,21 @@ class App extends Component {
           justify='center'
           alignItems='center'
         >
-          <Journal />
+          <Route
+            exact
+            path='/'
+            render={(routerProps) => <Journal {...routerProps} />}
+            />
+          {/* <Route path="/dictionary">
+            <Dictionary />
+          </Route>
+          <Route path='/about' component={About} /> */}
+          
 
           
         </Grid>
 
-      </Router>
-
-
+      </>
     )
   }
 }
