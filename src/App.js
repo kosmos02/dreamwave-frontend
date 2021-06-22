@@ -8,7 +8,7 @@ import { Button, CssBaseline, Grid, Box, } from '@material-ui/core';
 import Journal from './components/journal/journal'
 // import Dictionary from './components/dictionary/dictionary'
 // import Analytics from './components/analytics/analytics'
-// import About from './components/about/about'
+import About from './components/about/about'
 
 
 class App extends Component {
@@ -29,10 +29,10 @@ class App extends Component {
             path='/'
             render={(routerProps) => <Journal {...routerProps} />}
             />
-          {/* <Route path="/dictionary">
-            <Dictionary />
+          <Route path="/about">
+            <About />
           </Route>
-          <Route path='/about' component={About} /> */}
+          {/* <Route path='/about' component={About} />} */}
           
 
           
